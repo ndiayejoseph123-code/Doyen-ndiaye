@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Doyen Ndiaye — Accès Pédagogique</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #0e1e38;
+      --gold: #c8922a;
+      --gold-light: #e8b84b;
+      --cream: #f7f2ea;
+      --border: rgba(200,146,42,0.3);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      min-height: 100vh;
+      font-family: 'DM Sans', sans-serif;
+      background: var(--navy);
+      background-image:
+        radial-gradient(ellipse at 15% 60%, rgba(200,146,42,0.10) 0%, transparent 55%),
+        radial-gradient(ellipse at 85% 15%, rgba(200,146,42,0.06) 0%, transparent 45%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .ornament {
+      width: 90px; height: 90px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, var(--gold), var(--gold-light));
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 40px; color: var(--navy); font-weight: 700;
+      margin-bottom: 22px;
+      box-shadow: 0 0 0 8px rgba(200,146,42,0.1), 0 0 40px rgba(200,146,42,0.25);
+      animation: pulse 3s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%,100% { box-shadow: 0 0 0 8px rgba(200,146,42,0.1), 0 0 40px rgba(200,146,42,0.25); }
+      50%      { box-shadow: 0 0 0 14px rgba(200,146,42,0.05), 0 0 55px rgba(200,146,42,0.35); }
+    }
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 30px; font-weight: 700;
+      color: var(--cream); text-align: center; margin-bottom: 6px;
+    }
+    .subtitle {
+      font-size: 12px; color: rgba(247,242,234,0.45);
+      text-align: center; letter-spacing: 0.14em;
+      text-transform: uppercase; margin-bottom: 40px;
+    }
+    .card {
+      background: rgba(247,242,234,0.04);
+      border: 1px solid var(--border);
+      border-radius: 18px; padding: 30px 24px;
+      width: 100%; max-width: 380px;
+    }
+    .card label {
+      display: block; font-size: 11px;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 10px; font-weight: 500;
+    }
+    .code-input {
+      width: 100%;
+      background: rgba(255,255,255,0.04);
+      border: 1.5px solid rgba(200,146,42,0.35);
+      border-radius: 12px; padding: 14px 18px;
+      font-size: 18px; font-family: 'Courier New', monospace;
+      color: var(--cream); letter-spacing: 0.12em;
+      text-align: center; outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      margin-bottom: 16px; text-transform: uppercase;
+    }
+    .code-input::placeholder { color: rgba(247,242,234,0.18); font-size: 13px; letter-spacing: 0.04em; }
+    .code-input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(200,146,42,0.12); }
+    .btn-access {
+      width: 100%;
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+      color: var(--navy); border: none; border-radius: 12px;
+      padding: 15px; font-size: 15px; font-weight: 600;
+      cursor: pointer; letter-spacing: 0.04em;
+      transition: opacity 0.2s, transform 0.1s;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .btn-access:hover   { opacity: 0.9; }
+    .btn-access:active  { transform: scale(0.98); }
+    .btn-access:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+    .error-box {
+      margin-top: 14px; padding: 11px 14px;
+      background: rgba(220,50,50,0.1);
+      border: 1px solid rgba(220,50,50,0.25);
+      border-radius: 10px; color: #ff9090;
+      font-size: 13px; text-align: center;
+      display: none; line-height: 1.6;
+    }
+    /* Succès */
+    .success-icon { font-size: 44px; margin-bottom: 10px; text-align: center; }
+    .success-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 19px; color: var(--cream);
+      margin-bottom: 8px; text-align: center;
+    }
+    .success-sub {
+      font-size: 13px; color: rgba(247,242,234,0.55);
+      margin-bottom: 20px; line-height: 1.6; text-align: center;
+    }
+    .btn-go {
+      display: block; text-align: center;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: var(--navy); border: none; border-radius: 12px;
+      padding: 14px 28px; font-size: 15px; font-weight: 700;
+      cursor: pointer; text-decoration: none;
+      font-family: 'DM Sans', sans-serif; letter-spacing: 0.02em;
+      transition: opacity 0.2s;
+      animation: glow 2s ease-in-out infinite;
+    }
+    .btn-go:hover { opacity: 0.9; }
+    @keyframes glow {
+      0%,100% { box-shadow: 0 0 10px rgba(200,146,42,0.4); }
+      50%      { box-shadow: 0 0 24px rgba(200,146,42,0.7); }
+    }
+    .expiry-note {
+      margin-top: 14px; font-size: 11px;
+      color: rgba(247,242,234,0.35); text-align: center;
+    }
+    .footer-note {
+      margin-top: 28px; font-size: 12px;
+      color: rgba(247,242,234,0.25); text-align: center; line-height: 1.8;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="ornament">D</div>
+  <h1>Doyen Ndiaye</h1>
+  <p class="subtitle">Assistant Pédagogique · Sénégal</p>
+
+  <!-- Carte connexion -->
+  <div class="card" id="loginCard">
+    <label for="codeInput">Code d'accès</label>
+    <input
+      type="text" id="codeInput" class="code-input"
+      placeholder="DOYEN-XXXXXXXX" maxlength="14"
+      autocomplete="off" autocorrect="off"
+      autocapitalize="characters" spellcheck="false"
+    >
+    <button class="btn-access" id="btnAccess" onclick="validateCode()">Accéder →</button>
+    <div class="error-box" id="errorBox"></div>
+  </div>
+
+  <!-- Carte succès -->
+  <div class="card" id="successCard" style="display:none">
+    <div class="success-icon">🎓</div>
+    <div class="success-title">Accès accordé !</div>
+    <div class="success-sub">Vous êtes redirigé vers<br><strong style="color:var(--gold)">Doyen Ndiaye</strong> sur NotebookLM.</div>
+    <a class="btn-go" id="lienAcces" href="#" target="_blank">Ouvrir Doyen Ndiaye →</a>
+    <div class="expiry-note" id="expiryNote"></div>
+  </div>
+
+  <p class="footer-note">
+    Accès réservé aux abonnés.<br>
+    Pour obtenir un code, contactez Joseph Ndiaye.
+  </p>
+
+<script>
+const NOTEBOOK_URL   = "https://notebooklm.google.com/notebook/1cfa7362-8d25-4fd9-b4d2-f09190338c8e";
+const CODES_JSON_URL = "https://raw.githubusercontent.com/ndiayejoseph123-code/Doyen-ndiaye/main/codes.json";
+
+async function validateCode() {
+  const code = document.getElementById('codeInput').value.trim().toUpperCase();
+  if (!code) { showError("Veuillez entrer votre code d'accès."); return; }
+  setLoading(true); hideError();
+
+  try {
+    const res = await fetch(CODES_JSON_URL + "?nc=" + Date.now());
+    if (!res.ok) throw new Error();
+
+    const list  = await res.json();
+    const entry = list.find(c => c.code === code);
+
+    if (!entry) {
+      showError("Code invalide. Vérifiez votre code ou contactez Joseph Ndiaye.");
+      setLoading(false); return;
+    }
+
+    const today = new Date(); today.setHours(0,0,0,0);
+    const exp   = new Date(entry.expiry + "T00:00:00");
+
+    if (today > exp) {
+      const d = exp.toLocaleDateString('fr-FR', {day:'numeric', month:'long', year:'numeric'});
+      showError("Code expiré le " + d + ".\nContactez Joseph Ndiaye pour un nouveau code.");
+      setLoading(false); return;
+    }
+
+    // ✅ Valide
+    document.getElementById('loginCard').style.display   = 'none';
+    document.getElementById('successCard').style.display = 'block';
+    document.getElementById('lienAcces').href = NOTEBOOK_URL;
+
+    const diff  = Math.ceil((exp - today) / 86400000);
+    const label = exp.toLocaleDateString('fr-FR', {day:'numeric', month:'long', year:'numeric'});
+    document.getElementById('expiryNote').textContent =
+      "⏳ Accès valable jusqu'au " + label + " (" + diff + " jour" + (diff>1?"s":"") + " restant" + (diff>1?"s":"") + ")";
+
+    setTimeout(() => window.open(NOTEBOOK_URL, '_blank'), 2000);
+    setLoading(false);
+
+  } catch(e) {
+    showError("Erreur réseau. Vérifiez votre connexion et réessayez.");
+    setLoading(false);
+  }
+}
+
+function showError(msg)  { const e = document.getElementById('errorBox'); e.textContent = msg; e.style.display = 'block'; }
+function hideError()     { document.getElementById('errorBox').style.display = 'none'; }
+function setLoading(on)  {
+  const b = document.getElementById('btnAccess');
+  b.disabled = on; b.textContent = on ? '⏳ Vérification...' : 'Accéder →';
+}
+
+document.getElementById('codeInput').addEventListener('keydown', e => { if (e.key==='Enter') validateCode(); });
+document.getElementById('codeInput').addEventListener('input',   ()  => hideError());
+</script>
+</body>
+</html>
